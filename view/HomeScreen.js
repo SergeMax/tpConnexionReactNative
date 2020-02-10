@@ -2,9 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from "react-native-elements";
 import { StackNavigator } from 'react-navigation';
+import Router from "../Routeur";
 
 export default class HomeScreen extends React.Component{
     render (){
+        console.log(this.props);
+        const {navigate} = this.props.navigation;
 
 return(
             <View style={styles.container}>
@@ -15,12 +18,15 @@ return(
                     buttonStyle={styles.button}
                     title="Connexion"
                     type="solid"
+                    onPress={()=> navigate('Connexion')}
                 />
                 </View>
                 <View style={{marginTop:30, width:300}} >
                 <Button
                     title="Inscription"
                     type="clear"
+                    onPress={()=> navigate('Inscription')}
+
                 />
                 </View>
             </View>

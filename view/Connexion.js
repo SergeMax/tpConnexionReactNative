@@ -32,6 +32,7 @@ export default class Connexion extends React.Component{
                     <Button
                         title="Inscription"
                         type="clear"
+                        onPress={()=> navigate('Inscription')}
                     />
                 </View>
             </View>
