@@ -5,16 +5,14 @@ import Connexion  from './view/Connexion';
 import Inscription  from './view/Inscription';
 import PageConnect  from './view/PageConnect';
 
-import router from "./Routeur";
+import Router from "./Routeur";
 
 
 export default function App() {
   return (
-    <View style={styles.container}>
 
-      <router/>
+      <Router/>
 
-    </View>
   );
 }
 

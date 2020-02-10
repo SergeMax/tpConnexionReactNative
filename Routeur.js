@@ -1,5 +1,3 @@
-import 'react-native-gesture-handler';
-import * as React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
@@ -11,13 +9,13 @@ import PageConnect from './view/PageConnect';
 
 const Router = createStackNavigator(
     {
-        HomeScreen,
-        Connexion,
-        Inscription,
-        PageConnect
+        HomeScreen: HomeScreen,
+        Connexion: Connexion,
+        Inscription: Inscription,
+        PageConnect: PageConnect
     },
     {
-        initialRouteName: "HomeScreen",
+        initialRouteName: 'HomeScreen',
         headerMode: 'None'
     }
 );
