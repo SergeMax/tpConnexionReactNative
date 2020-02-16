@@ -1,12 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from "react-native-elements";
-import { StackNavigator } from 'react-navigation';
-import Router from "../Routeur";
+
 
 export default class HomeScreen extends React.Component{
     render (){
-        console.log(this.props);
+
+        console.log("je suis dans render et props nav "+this.props.navigation)
+        var users = this.props.navigation.state;
+        console.log("je print mon tab home 1 => " +users)
+        const propOwn = Object.getOwnPropertyNames(users);
+        console.log("je print mon tab home 2 => " +propOwn.length);
+        console.log("je print mon tab home 3 => " +this.props.navigation.state);
+        if(propOwn.length > 2){
+            users = this.props.navigation.state.params.users
+            console.log("je print mon tab home 3 => " +users);
+        }
         const {navigate} = this.props.navigation;
 
 return(
@@ -18,14 +27,14 @@ return(
                     buttonStyle={styles.button}
                     title="Connexion"
                     type="solid"
-                    onPress={()=> navigate('Connexion')}
+                    onPress={()=> navigate('Connexion', {users: users})}
                 />
                 </View>
                 <View style={{marginTop:30, width:300}} >
                 <Button
                     title="Inscription"
                     type="clear"
-                    onPress={()=> navigate('Inscription')}
+                    onPress={()=> navigate('Inscription' , {users: users})}
 
                 />
                 </View>

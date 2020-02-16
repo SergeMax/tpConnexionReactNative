@@ -4,13 +4,27 @@ import { Button } from "react-native-elements";
 
 export default class Connexion extends React.Component{
 
+
+
     render (){
+        console.log(this.prop + " simple this.proprs");
+        var users1 = this.props.navigation.state.params;
+        console.log(users1 + "  this.proprs.navigation.state.params");
+
+        var users = this.props.navigation.state.params.users;
+
+        console.log(users + "  this.proprs.navigation.state.params.users");
+
+
+     //   console.log("je print mon tab dash 3 => " +this.props.navigation.state.params)
+
+
 
         return(
             <View style={styles.container}>
                 <Text style={styles.titre}>Vous etes connecté</Text>
 
-                <Text>Bienvenu sur notre application d'inscription connexion.</Text>
+                <Text>Bienvenu {users[2][0]} sur notre application d'inscription connexion.</Text>
 
 
                 <View style={{marginTop:30, width:300}} >

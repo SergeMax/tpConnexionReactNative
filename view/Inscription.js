@@ -1,43 +1,123 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import { Button } from "react-native-elements";
+import {
+    emailValidator,
+    passwordValidator,
+    nameValidator,
+} from '../core/utils';
 
 export default class Connexion extends React.Component{
+
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            email: "",
+            password: ""
+        };
+    }
+
+
     render (){
+
+        function onSignUppPressed (state){
+            const nameError = nameValidator(state.name);
+            const emailError = emailValidator(state.email);
+            const passwordError = passwordValidator(state.password);
+            var user = [];
+            if (emailError || passwordError || nameError) {
+                alerte();
+                return;
+            } else {
+                user = [state.name, state.email, state.password];
+            }
+            var getprop = Object.getOwnPropertyNames(users);
+            console.log("je print mon tab => " + getprop);
+            getprop.push(user);
+            console.log("je print mon tab add => " + getprop);
+            console.log("je print mon tab tab => " + tab)
+            if (tab != null) {
+                tab.push(user)
+
+                navigate('Connexion', {users: tab, user: user});
+            } else {
+                navigate('Connexion', {users: getprop, user: user});
+            }
+        };
+        function alerte(){
+            console.log("je passe this func")
+            Alert.alert(
+                'Erreur',
+                'Login ou mot de passe incorrect',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                {cancelable: false},
+            );
+        }
+        const {navigate} = this.props.navigation;
+        console.log(this.props.navigation.state.params
+        );
+
+        console.log(this.props.navigation.state.params.users);
+        var users = this.props.navigation.state.params.users
+        var tab = null
+        console.log(users.length);
+        if (users.length != undefined) {
+            tab = users
+        }
+
 
         return(
             <View style={styles.container}>
                 <Text style={styles.titre}>Inscription</Text>
 
                 <TextInput
+                    label="Nom"
                     style={{ height: 40, borderRadius:5, marginTop:30, width: 300, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangeText(text)}
-                    value={"Email"}
+                    value={this.state.name}
+                    returnKeyType="next"
+                    onChangeText={text => this.setState({ name: text })}
                 />
 
                 <TextInput
                     style={{ height: 40, borderRadius:5, marginTop:30, width: 300, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangeText(text)}
-                    value={"Email"}
+                    label="E-mail"
+                    returnKeyType="next"
+                    value={this.state.email}
+                    onChangeText={text => this.setState({ email: text })}
+                    autoCapitalize="none"
+                    autoCompleteType="email"
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
                 />
 
                 <TextInput
                     style={{ height: 40, borderRadius:5, marginTop:30,  width: 300, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangeText(text)}
-                    value={"Password"}
+                    label="Mot de passe"
+                    returnKeyType="done"
+                    value={this.state.password}
+                    onChangeText={text => this.setState({ password: text })}
+                    secureTextEntry
+
                 />
 
                 <View style={{marginTop:30, width:300}} >
                     <Button
-                        title="Connexion"
+                        title="S'inscire"
                         type="solid"
                         buttonStyle={styles.button}
+                        onPress={() => onSignUppPressed(this.state)}
                     />
                 </View>
                 <View style={{marginTop:30, width:300}} >
                     <Button
                         title="Vous etes deja inscrit?"
                         type="clear"
+                        onPress={()=> navigate('Connexion', {users: users})}
                     />
                 </View>
             </View>
