@@ -8,6 +8,8 @@ import TextInput from '../Components/TextInput';
 import { theme } from '../core/theme';
 import Button from '../Components/Button';
 import * as SQLite from 'expo-sqlite'
+
+
 export default class ForgotPasswordScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -28,6 +30,7 @@ export default class ForgotPasswordScreen extends React.Component {
                 {cancelable: false},
             );
         }
+
         function onSendPressed (state){
             const emailError = emailValidator(state.email);
             const newpasswordError = passwordValidator(state.newpassword)
@@ -43,13 +46,13 @@ export default class ForgotPasswordScreen extends React.Component {
                 );
             }
 
-            navigate('Loginscreen');
+            navigate('Connexion');
         };
 
         const {navigate} = this.props.navigation;
         return (
             <Background>
-                <BackButton goBack={() => navigate('Loginscreen')} />
+                <BackButton goBack={() => navigate('Connexion')} />
                 <Header>Reinitialiser son mot de passe</Header>
 
                 <TextInput

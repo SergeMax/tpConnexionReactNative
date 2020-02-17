@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { Button } from "react-native-elements";
 
 import {
@@ -18,6 +18,7 @@ export default class Connexion extends React.Component{
             password: ""
         };
     }
+
     render (){
         const db = SQLite.openDatabase("database.db");
         db.transaction(tx => {
@@ -40,11 +41,13 @@ export default class Connexion extends React.Component{
         function onLoginPressed (state) {
             const emailError = emailValidator(state.email);
             const passwordError = passwordValidator(state.password);
-
+            console.log(data);
             if (emailError || passwordError) {
                 alert()
                 return;
             }
+
+
             var good = false
             var user = null;
             for (var i =0; i<data.length; i++){
@@ -169,15 +172,20 @@ export default class Connexion extends React.Component{
                         type="solid"
                         buttonStyle={styles.button}
                         onPress={() => onLoginPressed(this.state)}
-
                     />
                 </View>
                 <View style={{marginTop:30, width:300}} >
                     <Button
                         title="Inscription"
                         type="clear"
-                        onPress={()=> navigate('Inscription', {users: users})}
+                        onPress={()=> navigate('Inscription'/*, {users: users}*/)}
                     />
+
+
+                    <TouchableOpacity onPress={() => navigate('ForgotPasswordScreen')}>
+                        <Text style={styles.link}>Mot de passe oublié</Text>
+                    </TouchableOpacity>
+
                 </View>
             </View>
 
@@ -203,7 +211,14 @@ const styles = StyleSheet.create({
     button:{
         backgroundColor: 'purple',
 
-    }
+    },
+    link: {
+        fontWeight: 'bold',
+        color: 'purple',
+        marginLeft: 90,
+        alignItems: 'center'
+
+    },
 });
 
 

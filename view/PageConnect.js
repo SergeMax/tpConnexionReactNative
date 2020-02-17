@@ -9,7 +9,8 @@ export default class Connexion extends React.Component{
     render (){
 
         console.log(this.props);
-        console.log(this.props.navigation.state.params)
+        console.log(this.props.navigation.state.params);
+        const {navigate} = this.props.navigation;
        /* console.log(this.prop + " simple this.proprs");
         var users1 = this.props.navigation.state.params;
         console.log(users1 + "  this.proprs.navigation.state.params");
@@ -34,7 +35,7 @@ export default class Connexion extends React.Component{
                     <Button
                         title="Deconnexion"
                         type="clear"
-                        onPress={() => onSignUppPressed(this.state)}
+                        onPress={() => navigate('HomeScreen')}
                     />
                 </View>
             </View>

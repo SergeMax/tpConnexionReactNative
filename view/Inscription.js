@@ -71,16 +71,15 @@ export default class Connexion extends React.Component{
             );
         }
         const {navigate} = this.props.navigation;
-        console.log(this.props.navigation.state.params
-        );
-
-        console.log(this.props.navigation.state.params.users);
-        var users = this.props.navigation.state.params.users
-        var tab = null
-        console.log(users.length);
-        if (users.length != undefined) {
-            tab = users
-        }
+        // console.log(this.props.navigation.state.params);
+        //
+        // console.log(this.props.navigation.state.params.users);
+        // var users = this.props.navigation.state.params.users
+        // var tab = null
+        // console.log(users.length);
+        // if (users.length != undefined) {
+        //     tab = users
+        // }
 
 
         return(
@@ -91,6 +90,7 @@ export default class Connexion extends React.Component{
                     label="Nom"
                     style={{ height: 40, borderRadius:5, marginTop:30, width: 300, borderColor: 'gray', borderWidth: 1 }}
                     value={this.state.name}
+                    placeholder="Nom"
                     returnKeyType="next"
                     onChangeText={text => this.setState({ name: text })}
                 />
@@ -99,6 +99,7 @@ export default class Connexion extends React.Component{
                     style={{ height: 40, borderRadius:5, marginTop:30, width: 300, borderColor: 'gray', borderWidth: 1 }}
                     label="E-mail"
                     returnKeyType="next"
+                    placeholder="Email"
                     value={this.state.email}
                     onChangeText={text => this.setState({ email: text })}
                     autoCapitalize="none"
@@ -110,6 +111,7 @@ export default class Connexion extends React.Component{
                 <TextInput
                     style={{ height: 40, borderRadius:5, marginTop:30,  width: 300, borderColor: 'gray', borderWidth: 1 }}
                     label="Mot de passe"
+                    placeholder="Mdp"
                     returnKeyType="done"
                     value={this.state.password}
                     onChangeText={text => this.setState({ password: text })}
@@ -129,7 +131,7 @@ export default class Connexion extends React.Component{
                     <Button
                         title="Vous etes deja inscrit?"
                         type="clear"
-                        onPress={()=> navigate('Connexion', {users: users})}
+                        onPress={()=> navigate('Connexion'/*, {users: users}*/)}
                     />
                 </View>
             </View>
