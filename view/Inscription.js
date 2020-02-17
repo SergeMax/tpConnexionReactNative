@@ -6,10 +6,9 @@ import {
     passwordValidator,
     nameValidator,
 } from '../core/utils';
+import * as SQLite from 'expo-sqlite'
 
 export default class Connexion extends React.Component{
-
-
 
     constructor(props) {
         super(props);
@@ -23,6 +22,11 @@ export default class Connexion extends React.Component{
 
     render (){
 
+        const db = SQLite.openDatabase("database.db");
+        db.transaction(tx => {
+            tx.executeSql("create table if not exists user (id integer primary key not null, name text, mail text, mdp text);");
+        });
+
         function onSignUppPressed (state){
             const nameError = nameValidator(state.name);
             const emailError = emailValidator(state.email);
@@ -32,6 +36,14 @@ export default class Connexion extends React.Component{
                 alerte();
                 return;
             } else {
+
+                db.transaction(
+                    tx => {
+                        tx.executeSql("insert into user (name, mail, mdp) values (?, ?, ?)", [state.name, state.email, state.password]);
+                    }
+                );
+                navigate('Connexion', {username: state.name});
+
                 user = [state.name, state.email, state.password];
             }
             var getprop = Object.getOwnPropertyNames(users);

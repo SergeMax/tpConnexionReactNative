@@ -7,6 +7,7 @@ import {
     passwordValidator,
     nameValidator,
 } from '../core/utils';
+import * as SQLite from 'expo-sqlite'
 
 export default class Connexion extends React.Component{
 
@@ -18,6 +19,12 @@ export default class Connexion extends React.Component{
         };
     }
     render (){
+        const db = SQLite.openDatabase("database.db");
+        db.transaction(tx => {
+            tx.executeSql("create table if not exists user (id integer primary key not null, name text, mail text, mdp text);");
+        });
+        gocheckUsers();
+        var data = null;
         function alert(){
             Alert.alert(
                 'Erreur',
@@ -28,16 +35,47 @@ export default class Connexion extends React.Component{
                 {cancelable: false},
             );
         }
+
+
         function onLoginPressed (state) {
             const emailError = emailValidator(state.email);
             const passwordError = passwordValidator(state.password);
 
             if (emailError || passwordError) {
-                this.alert()
+                alert()
                 return;
             }
-            console.log("je test" + tab);
+            var good = false
+            var user = null;
+            for (var i =0; i<data.length; i++){
+                if(data[i]["mail"] == state.email && data[i]["mdp"] == state.password){
+                    good = true;
+                    user = data[i]
+                }
+            }
+            if (good){
+                navigate('PageConnect', {username: user['name']});
+            }else{
+                alert()
+            }
+
             var isvalid = false;
+            var user = null;
+
+        };
+
+            /* Version Sans bdd
+
+
+            function onLoginPressed (state) {
+            const emailError = emailValidator(state.email);
+            const passwordError = passwordValidator(state.password);
+
+            if (emailError || passwordError) {
+                alert()
+                return;
+            }
+           var isvalid = false;
             var user = null;
             if(users.length !== undefined){
                 console.log("if 1");
@@ -84,6 +122,19 @@ export default class Connexion extends React.Component{
         var users = this.props.navigation.state.params.users;
         var tab = [];
 
+        */
+
+
+        function gocheckUsers(){
+            db.transaction(
+                tx => {
+                    tx.executeSql("select * from user", [], (_, { rows: { _array } }) =>
+                        data = _array
+                    );
+                }
+            );
+        }
+        const {navigate} = this.props.navigation;
 
 
         return(

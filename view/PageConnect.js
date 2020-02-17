@@ -7,7 +7,10 @@ export default class Connexion extends React.Component{
 
 
     render (){
-        console.log(this.prop + " simple this.proprs");
+
+        console.log(this.props);
+        console.log(this.props.navigation.state.params)
+       /* console.log(this.prop + " simple this.proprs");
         var users1 = this.props.navigation.state.params;
         console.log(users1 + "  this.proprs.navigation.state.params");
 
@@ -18,19 +21,20 @@ export default class Connexion extends React.Component{
 
      //   console.log("je print mon tab dash 3 => " +this.props.navigation.state.params)
 
-
+        */
 
         return(
             <View style={styles.container}>
                 <Text style={styles.titre}>Vous etes connecté</Text>
 
-                <Text>Bienvenu {users[2][0]} sur notre application d'inscription connexion.</Text>
+                <Text>Bienvenu {this.props.navigation.state.params.username} sur notre application d'inscription connexion.</Text>
 
 
                 <View style={{marginTop:30, width:300}} >
                     <Button
                         title="Deconnexion"
                         type="clear"
+                        onPress={() => onSignUppPressed(this.state)}
                     />
                 </View>
             </View>
