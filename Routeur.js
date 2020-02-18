@@ -1,23 +1,21 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import HomeScreen from './view/HomeScreen';
-import Connexion from './view/Connexion';
-import Inscription from './view/Inscription';
-import PageConnect from './view/PageConnect';
-import ForgotPasswordScreen from './view/ForgotPasswordScreen';
+import MonQuizz from './view/MonQuizz';
+
+import Resultat from './view/Resultat';
+import Quiz from './view/Quiz';
+
 
 const Router = createStackNavigator(
     {
-        HomeScreen: HomeScreen,
-        Connexion: Connexion,
-        Inscription: Inscription,
-        PageConnect: PageConnect,
-        ForgotPasswordScreen: ForgotPasswordScreen
+        MonQuizz: MonQuizz,
+      //  Quizz: Quizz,
+        Quiz: Quiz,
+        Resultat: Resultat
     },
     {
-        initialRouteName: 'HomeScreen',
-        headerMode: 'None'
+        initialRouteName: 'MonQuizz'
     }
 );
 

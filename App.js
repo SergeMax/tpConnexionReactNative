@@ -1,9 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import HomeScreen  from './view/HomeScreen';
-import Connexion  from './view/Connexion';
-import Inscription  from './view/Inscription';
-import PageConnect  from './view/PageConnect';
 
 import Router from "./Routeur";
 

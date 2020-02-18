@@ -2,15 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button } from "react-native-elements";
 
-export default class Connexion extends React.Component{
+export default class Resultat extends React.Component{
 
 
 
     render (){
 
-        console.log(this.props);
-        console.log(this.props.navigation.state.params);
-        const {navigate} = this.props.navigation;
+        //console.log(this.props);
+      //  console.log(this.props.navigation.state.params);
+     //   const {navigate} = this.props.navigation;
        /* console.log(this.prop + " simple this.proprs");
         var users1 = this.props.navigation.state.params;
         console.log(users1 + "  this.proprs.navigation.state.params");
@@ -24,20 +24,24 @@ export default class Connexion extends React.Component{
 
         */
 
+
+console.log(this.props.navigation.state.params.score);
+
         return(
             <View style={styles.container}>
-                <Text style={styles.titre}>Vous etes connecté</Text>
+                <Text style={styles.titre}>Resultat</Text>
 
-                <Text>Bienvenu {this.props.navigation.state.params.username} sur notre application d'inscription connexion.</Text>
+                <Text style={styles.titre}>Pour le joueur : {this.props.navigation.state.params.name}</Text>
+               <Text>Votre score est de  {this.props.navigation.state.params.score} sur 3 </Text>
 
 
-                <View style={{marginTop:30, width:300}} >
+               {/* <View style={{marginTop:30, width:300}} >
                     <Button
                         title="Deconnexion"
                         type="clear"
                         onPress={() => navigate('HomeScreen')}
                     />
-                </View>
+                </View>*/}
             </View>
 
         )
